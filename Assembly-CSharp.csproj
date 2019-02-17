@@ -65,6 +65,7 @@
     <Compile Include="Assets\scripts\isRuning.cs" />
     <Compile Include="Assets\scripts\movement.cs" />
     <Compile Include="Assets\scripts\PlayerObject.cs" />
+    <Compile Include="Assets\scripts\shoot.cs" />
     <Compile Include="Assets\scripts\test.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/sergi/Desktop/PIXEL COWBOYS ALL/Voxel Cowboys/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

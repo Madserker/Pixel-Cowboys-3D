@@ -49,6 +49,7 @@ public class followPlayer : MonoBehaviour
 		// compute rotation
 		if (lookAt)
 		{
+
 			transform.LookAt(target);
 		}
 		else

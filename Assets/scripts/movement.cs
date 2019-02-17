@@ -14,6 +14,8 @@ public class movement : NetworkBehaviour
 	private Vector3 moveDirection = Vector3.zero;
 	private CharacterController controller;
 
+	private float lastJump = 0.0f;
+
 
 	public float mouseSensitivity = 100.0f;
 	public float clampAngle = 80.0f;
@@ -43,6 +45,8 @@ public class movement : NetworkBehaviour
 			return;
 		}
 		gameObject.name = "Local";
+
+
 		if (controller.isGrounded)
 		{
 			// We are grounded, so recalculate
@@ -55,19 +59,29 @@ public class movement : NetworkBehaviour
 			if (Input.GetButton("Jump"))
 			{
 				moveDirection.y = jumpSpeed;
+				lastJump = jumpSpeed;
 			}
+
+		}
+		else {
+			moveDirection = new Vector3(Input.GetAxis("Horizontal"), lastJump, Input.GetAxis("Vertical"));
+			moveDirection = transform.TransformDirection(moveDirection);
+			moveDirection.x = moveDirection.x * (speed/2);
+			moveDirection.z = moveDirection.z * (speed/2);
 
 		}
 
 
 
 		// Apply gravity
+		lastJump = lastJump - (gravity * Time.deltaTime);
 		moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
 
 		// Move the controller
 		controller.Move(moveDirection * Time.deltaTime);
 
 
+		//ROTATION==================================================
 		float mouseX = Input.GetAxis("Mouse X");
 		float mouseY = -Input.GetAxis("Mouse Y");
 
