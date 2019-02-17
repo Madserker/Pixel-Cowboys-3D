@@ -77,4 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaf5a5e2db08fd44bb614b42555b6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUnitPrefab: {fileID: 1751299299, guid: 711224a67d34b9d46b2e60f54d27bc47, type: 3}
+  speed: 6
+  jumpSpeed: 8
+  gravity: 20
+  mouseSensitivity: 100
+  clampAngle: 80
+  PlayerUnitPrefab: {fileID: 1751299299, guid: 9594b7602902df54b886f5075643c8e8, type: 3}

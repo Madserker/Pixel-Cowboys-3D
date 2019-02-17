@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 1751299301}
   - component: {fileID: 1751299300}
   - component: {fileID: 1751299303}
+  - component: {fileID: 9038936574971288661}
   - component: {fileID: 1751299302}
   - component: {fileID: 1751299304}
   - component: {fileID: 4985193607560363507}
@@ -1050,6 +1051,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.065, z: 0}
+--- !u!114 &9038936574971288661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751299299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e200718ce16d5c49a66815f35e5bac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet_Emitter: {fileID: 1751299299}
+  Bullet: {fileID: 5193267040330585587, guid: 07c77be6b762e344ab3738385ab14941, type: 3}
+  offset_y: 1
+  Bullet_Forward_Force: 5000
 --- !u!114 &1751299302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,6 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 14.5
+  run: 2
   jumpSpeed: 10.7
   gravity: 20
   mouseSensitivity: 100

@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class movement : NetworkBehaviour
 	{
 	public float speed = 6.0f;
+	public float run = 2.0f;
 	public float jumpSpeed = 8.0f;
 	public float gravity = 20.0f;
 
@@ -13,6 +14,8 @@ public class movement : NetworkBehaviour
 
 	private Vector3 moveDirection = Vector3.zero;
 	private CharacterController controller;
+
+	private float lastJump = 0.0f;
 
 
 	public float mouseSensitivity = 100.0f;
@@ -42,7 +45,9 @@ public class movement : NetworkBehaviour
 		if (hasAuthority == false) {
 			return;
 		}
+
 		gameObject.name = "Local";
+
 		if (controller.isGrounded)
 		{
 			// We are grounded, so recalculate
@@ -55,6 +60,21 @@ public class movement : NetworkBehaviour
 			if (Input.GetButton("Jump"))
 			{
 				moveDirection.y = jumpSpeed;
+				lastJump = jumpSpeed;
+			}
+			if (Input.GetKey(KeyCode.LeftShift)) {
+				moveDirection.x *= run;
+				moveDirection.z *= run;
+			}
+
+
+		}
+		else {
+			if (lastJump > 0) {
+				moveDirection = new Vector3(Input.GetAxis("Horizontal"), lastJump, Input.GetAxis("Vertical"));
+				moveDirection = transform.TransformDirection(moveDirection);
+				moveDirection.x = moveDirection.x * (speed / 2);
+				moveDirection.z = moveDirection.z * (speed / 2);
 			}
 
 		}
@@ -62,12 +82,14 @@ public class movement : NetworkBehaviour
 
 
 		// Apply gravity
+		lastJump = lastJump - (gravity * Time.deltaTime);
 		moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
 
 		// Move the controller
 		controller.Move(moveDirection * Time.deltaTime);
 
 
+		//ROTATION==================================================
 		float mouseX = Input.GetAxis("Mouse X");
 		float mouseY = -Input.GetAxis("Mouse Y");
 
