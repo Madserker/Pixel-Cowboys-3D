@@ -1063,6 +1063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 14.5
+  run: 2
   jumpSpeed: 10.7
   gravity: 20
   mouseSensitivity: 100

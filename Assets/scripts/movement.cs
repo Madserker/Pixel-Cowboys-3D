@@ -6,7 +6,8 @@ using UnityEngine.Networking;
 public class movement : NetworkBehaviour
 	{
 	public float speed = 6.0f;
-	public float jumpSpeed = 8.0f;
+	[SerializeField] public float run = 1.5f;
+    public float jumpSpeed = 8.0f;
 	public float gravity = 20.0f;
 
 	private Animator anim;
@@ -45,8 +46,9 @@ public class movement : NetworkBehaviour
 		gameObject.name = "Local";
 		if (controller.isGrounded)
 		{
-			// We are grounded, so recalculate
-			// move direction directly from axes
+            // We are grounded, so recalculate
+            // move direction directly from axes
+            Debug.Log(speed);
 
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 			moveDirection = transform.TransformDirection(moveDirection);
@@ -57,9 +59,14 @@ public class movement : NetworkBehaviour
 				moveDirection.y = jumpSpeed;
 			}
 
+            if (Input.GetKey(KeyCode.LeftShift)) {
+                moveDirection.x *= run;
+                moveDirection.z *= run;
+            }
+
 		}
 
-
+        
 
 		// Apply gravity
 		moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
