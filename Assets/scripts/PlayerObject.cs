@@ -54,5 +54,6 @@ public class PlayerObject : NetworkBehaviour {
 		//propagate to all the clients
 		NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
 	}
+
 	
 }

@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class movement : NetworkBehaviour
 	{
 	public float speed = 6.0f;
+	public float run = 2.0f;
 	public float jumpSpeed = 8.0f;
 	public float gravity = 20.0f;
 
@@ -44,8 +45,8 @@ public class movement : NetworkBehaviour
 		if (hasAuthority == false) {
 			return;
 		}
-		gameObject.name = "Local";
 
+		gameObject.name = "Local";
 
 		if (controller.isGrounded)
 		{
@@ -61,13 +62,20 @@ public class movement : NetworkBehaviour
 				moveDirection.y = jumpSpeed;
 				lastJump = jumpSpeed;
 			}
+			if (Input.GetKey(KeyCode.LeftShift)) {
+				moveDirection.x *= run;
+				moveDirection.z *= run;
+			}
+
 
 		}
 		else {
-			moveDirection = new Vector3(Input.GetAxis("Horizontal"), lastJump, Input.GetAxis("Vertical"));
-			moveDirection = transform.TransformDirection(moveDirection);
-			moveDirection.x = moveDirection.x * (speed/2);
-			moveDirection.z = moveDirection.z * (speed/2);
+			if (lastJump > 0) {
+				moveDirection = new Vector3(Input.GetAxis("Horizontal"), lastJump, Input.GetAxis("Vertical"));
+				moveDirection = transform.TransformDirection(moveDirection);
+				moveDirection.x = moveDirection.x * (speed / 2);
+				moveDirection.z = moveDirection.z * (speed / 2);
+			}
 
 		}
 

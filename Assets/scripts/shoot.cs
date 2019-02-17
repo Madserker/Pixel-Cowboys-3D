@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
 
-public class shoot : MonoBehaviour
+public class shoot : NetworkBehaviour
 {
 	//Drag in the Bullet Emitter from the Component Inspector.
 	public GameObject Bullet_Emitter;
@@ -25,6 +26,10 @@ public class shoot : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (hasAuthority == false)
+		{
+			return;
+		}
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
 			//The Bullet instantiation happens here.
@@ -48,5 +53,4 @@ public class shoot : MonoBehaviour
 			Destroy(Temporary_Bullet_Handler, 10.0f);
 		}
 	}
-
 }
